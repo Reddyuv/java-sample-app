@@ -4,29 +4,27 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo 'Checking out code...'
-                git 'https://github.com/Reddyuv/java-sample-app.git'
-            }
-        }
-        stage('Build') {
-            steps {
-                echo 'Building the application...'
-                sh 'mvn clean compile'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Running unit tests...'
-                sh 'mvn test'
-            }
-        }
-        stage('Package') {
-            steps {
-                echo 'Packaging the application...'
-                sh 'mvn package'
+                git branch: 'main', url: 'https://github.com/Reddyuv/java-sample-app.git'
             }
         }
 
+        stage('Build') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                sh 'mvn package'
+            }
+        }
     }
 
     post {
